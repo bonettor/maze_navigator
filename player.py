@@ -64,13 +64,19 @@ class Player(turtle.Turtle):
                 self.position_idx = [tmp_i, j]
 
 if __name__ == "__main__":
+    wm = turtle.Screen()
+    turtle.register_shape('tenor.gif')
     gen = MazeGenerator(30,30)
     pen = Pen()
     gen.prim_maze()
     gen.set_start()
     gen.set_end()
+    wm.tracer(0)
     gen.draw_maze(pen)
-    player = Player(gen.start_coordinates, gen.start_indices, gen.maze)
+    wm.tracer(1)
+    player = Player(init_coordinates=gen.start_coordinates, 
+                                    init_indices=gen.start_indices, 
+                                    maze_matrix=gen.maze)
     turtle.listen()
     turtle.onkey(player.move_left, 'Left')
     turtle.onkey(player.move_right, 'Right')
